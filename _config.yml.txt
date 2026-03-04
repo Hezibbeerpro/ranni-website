@@ -1,0 +1,4 @@
+remote_theme: jekyll/minima # או התמה שבה אתה משתמש
+plugins:
+  - jekyll-sitemap
+
