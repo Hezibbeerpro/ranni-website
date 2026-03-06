@@ -1,27 +1,26 @@
 ---
 layout: default
-title: הנגיחות של רני
+title: אתגר הכדורים של רני
 ---
 
-<h1 style="text-align: center;">הנגיחות של רני</h1>
-<p style="text-align: center;">לחץ על הכדור כדי לנגוח בו לפני שהוא נופל לרצפה! ככל שתצליח יותר, המהירות תעלה.</p>
+<h1 style="text-align: center;">אתגר הכדורים של רני</h1>
+<p style="text-align: center; font-weight: bold;">
+    ✅ לחץ על: <span style="color: blue;">מכבי תל אביב</span> או <span style="color: darkred;">ברצלונה</span> (+1)<br>
+    ❌ אל תיגע ב: <span style="color: green;">מכבי חיפה</span> או <span style="color: white; background: #333;">ריאל מדריד</span> (-1)
+</p>
 
-<div id="game-area" style="position: relative; width: 100%; max-width: 400px; height: 500px; background-color: #87CEEB; margin: 0 auto; overflow: hidden; border: 4px solid #0033A0; border-radius: 10px; cursor: crosshair;">
+<div id="game-area" style="position: relative; width: 100%; max-width: 400px; height: 500px; background-color: #87CEEB; margin: 0 auto; overflow: hidden; border: 4px solid #0033A0; border-radius: 10px; transition: background-color 0.2s;">
     
-    <div style="position: absolute; top: 10px; right: 10px; font-size: 24px; font-weight: bold; color: #0033A0; z-index: 10; background: rgba(255,255,255,0.5); padding: 5px; border-radius: 5px;">
+    <div style="position: absolute; top: 10px; right: 10px; font-size: 24px; font-weight: bold; color: #0033A0; z-index: 10; background: rgba(255,255,255,0.7); padding: 5px 10px; border-radius: 5px;">
         נקודות: <span id="score">0</span>
     </div>
 
-    <img id="ball" src="{{ '/assets/images/ball.jpg' | relative_url }}" 
-         onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'80\' height=\'80\'><circle cx=\'40\' cy=\'40\' r=\'38\' fill=\'%23FFD700\' stroke=\'%230033A0\' stroke-width=\'4\'/></svg>'"
-         alt="כדור" 
-         style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 80px; cursor: pointer; user-select: none; z-index: 5; border-radius: 50%; object-fit: cover;" 
-         draggable="false">
+    <img id="ball" src="" alt="כדור" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 80px; cursor: pointer; user-select: none; z-index: 5; border-radius: 50%; object-fit: cover;" draggable="false">
 
-    <div id="game-over-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 51, 160, 0.9); z-index: 20; text-align: center; padding-top: 150px; color: white;">
+    <div id="game-over-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 51, 160, 0.95); z-index: 20; text-align: center; padding-top: 150px; color: white;">
         <h2 style="font-size: 36px; color: #FFD700;">המשחק נגמר!</h2>
-        <p style="font-size: 24px;">השגת <span id="final-score">0</span> נקודות</p>
-        <button onclick="startGame()" style="margin-top: 20px; padding: 15px 30px; font-size: 20px; background-color: #FFD700; color: #0033A0; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s;">נסה שוב</button>
+        <p style="font-size: 24px;">התוצאה הסופית: <span id="final-score">0</span></p>
+        <button onclick="startGame()" style="margin-top: 20px; padding: 15px 30px; font-size: 20px; background-color: #FFD700; color: #0033A0; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">נסה שוב</button>
     </div>
 </div>
 
@@ -31,26 +30,44 @@ title: הנגיחות של רני
     const finalScoreDisplay = document.getElementById('final-score');
     const gameOverScreen = document.getElementById('game-over-screen');
     const gameArea = document.getElementById('game-area');
-    
+
+    // רשימת הכדורים והערך שלהם
+    const ballTypes = [
+        { src: "{{ '/assets/images/ball.jpg' | relative_url }}", points: 1 },         // מכבי ת"א
+        { src: "{{ '/assets/images/barcelona.jpg' | relative_url }}", points: 1 },    // ברצלונה
+        { src: "{{ '/assets/images/maccabi_haifa.jpg' | relative_url }}", points: -1 }, // מכבי חיפה
+        { src: "{{ '/assets/images/real_madrid.jpg' | relative_url }}", points: -1 }   // ריאל מדריד
+    ];
+
     let score = 0;
     let ballY = 0; 
-    let speed = 2.5; 
+    let speed = 3; 
+    let currentBallType = ballTypes[0];
     let gameLoop;
     let isPlaying = false;
 
     function startGame() {
         score = 0;
         ballY = 0;
-        speed = 2.5; 
+        speed = 3;
         isPlaying = true;
-        
         scoreDisplay.innerText = score;
         gameOverScreen.style.display = 'none';
-        ball.style.top = '0px';
-        ball.style.left = '50%';
-        
+        setRandomBall();
         cancelAnimationFrame(gameLoop);
         update();
+    }
+
+    function setRandomBall() {
+        // בחירת סוג כדור אקראי מהרשימה
+        const randomIndex = Math.floor(Math.random() * ballTypes.length);
+        currentBallType = ballTypes[randomIndex];
+        ball.src = currentBallType.src;
+        
+        // מיקום אופקי אקראי
+        let randomLeft = Math.floor(Math.random() * 70) + 15;
+        ball.style.left = randomLeft + '%';
+        ballY = -80; // מתחיל קצת מעל המסך
     }
 
     function update() {
@@ -59,30 +76,46 @@ title: הנגיחות של רני
         ballY += speed;
         ball.style.top = ballY + 'px';
 
-        // בדיקה אם הכדור עבר את גובה אזור המשחק (500 פיקסלים)
-        if (ballY > 420) { 
-            endGame();
+        // אם הכדור נפל לרצפה
+        if (ballY > 500) {
+            // אם זה כדור שחייבים ללחוץ עליו (מכבי או בארסה) והוא נפל - נפסלים
+            if (currentBallType.points > 0) {
+                endGame();
+            } else {
+                // אם זה כדור של חיפה/ריאל והוא נפל - הכל טוב, ממשיכים לכדור הבא
+                setRandomBall();
+                gameLoop = requestAnimationFrame(update);
+            }
         } else {
             gameLoop = requestAnimationFrame(update);
         }
     }
 
-    function headBall(e) {
+    function handleBallClick(e) {
         if (!isPlaying) return;
-
-        // מניעת התנהגות ברירת מחדל בנייד
         if (e) e.preventDefault();
 
-        score++;
+        if (currentBallType.points > 0) {
+            // לחיצה נכונה
+            score += currentBallType.points;
+            flashColor('#d4edda'); // ירוק בהיר
+            speed += 0.2; // העלאת קושי
+            setRandomBall();
+        } else {
+            // לחיצה אסורה (חיפה או ריאל)
+            score += currentBallType.points;
+            flashColor('#f8d7da'); // אדום בהיר
+            if (score < 0) score = 0; // שלא ירד מתחת ל-0
+            setRandomBall();
+        }
         scoreDisplay.innerText = score;
-        
-        // החזרת הכדור למעלה ושינוי מיקום אופקי אקראי כדי שיהיה מעניין
-        ballY = 0;
-        let randomLeft = Math.floor(Math.random() * 70) + 15; // בין 15% ל-85% מהרוחב
-        ball.style.left = randomLeft + '%';
-        
-        // הגברת קושי
-        speed += 0.3;
+    }
+
+    function flashColor(color) {
+        gameArea.style.backgroundColor = color;
+        setTimeout(() => {
+            gameArea.style.backgroundColor = '#87CEEB';
+        }, 150);
     }
 
     function endGame() {
@@ -91,10 +124,8 @@ title: הנגיחות של רני
         gameOverScreen.style.display = 'block';
     }
 
-    // מאזינים ללחיצות
-    ball.addEventListener('mousedown', headBall);
-    ball.addEventListener('touchstart', headBall);
+    ball.addEventListener('mousedown', handleBallClick);
+    ball.addEventListener('touchstart', handleBallClick);
 
-    // התחלה אוטומטית
     window.onload = startGame;
 </script>
