@@ -3,19 +3,16 @@ layout: default
 title: משחקים
 ---
 
-<div style="text-align: center; padding: 40px;">
+<div class="content-center">
     <h1>המשחקים של רני</h1>
     <p>מוכנים לאתגר? בחרו משחק והתחילו לשחק!</p>
     
-    <div style="margin-top: 50px;">
-        <div style="border: 3px solid #0033A0; border-radius: 15px; padding: 20px; display: inline-block; background-color: #fdfdfd; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-            <img src="{{ '/assets/images/ball.jpg' | relative_url }}" alt="כדור" style="width: 100px; border-radius: 50%; margin-bottom: 15px;">
-            <h2 style="color: #0033A0;">הנגיחות של רני</h2>
+    <div class="content-spaced">
+        <div class="card">
+            <img src="{{ '/assets/images/ball.jpg' | relative_url }}" alt="כדור">
+            <h2>הנגיחות של רני</h2>
             <p>אל תתנו לכדור ליפול לרצפה!</p>
-            <a href="{{ '/game.html' | relative_url }}" 
-               style="display: inline-block; background-color: #FFD700; color: #0033A0; padding: 12px 25px; text-decoration: none; font-weight: bold; border-radius: 5px; border: 2px solid #0033A0; transition: 0.3s;">
-               שחקו עכשיו
-            </a>
+            <a href="{{ '/game.html' | relative_url }}" class="card-link">שחקו עכשיו</a>
         </div>
     </div>
 </div>
