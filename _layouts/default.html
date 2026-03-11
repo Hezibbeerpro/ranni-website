@@ -126,8 +126,121 @@
             margin-top: 30px;
             text-align: center;
         }
+        .video-section iframe {
+            max-width: 100%;
+            height: auto;
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
         .profile-image {
             width: 150px;
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+            header {
+                padding: 10px;
+            }
+            header a {
+                display: inline-block;
+                margin: 5px 8px;
+                font-size: 1rem;
+            }
+            main {
+                padding: 15px;
+            }
+            .content-center {
+                padding: 20px 15px;
+                text-align: center;
+            }
+            .card {
+                display: block;
+                width: 100%;
+                max-width: 400px;
+                margin: 15px auto;
+                padding: 15px;
+            }
+            .card img {
+                width: 80px;
+            }
+            .card h2 {
+                font-size: 1.3rem;
+                margin: 10px 0;
+            }
+            .card p {
+                font-size: 0.95rem;
+            }
+            .card-link {
+                display: block;
+                padding: 10px 15px;
+                margin-top: 10px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .profile-image {
+                width: 100px;
+                max-width: 100%;
+            }
+            h1 {
+                font-size: 1.8rem;
+                margin: 15px 0;
+            }
+            h2 {
+                font-size: 1.4rem;
+            }
+            .video-section {
+                margin: 20px 0;
+            }
+        }
+        
+        /* Game area responsive */
+        #game-area {
+            min-height: 500px;
+        }
+        
+        @media (max-width: 480px) {
+            header a {
+                display: block;
+                padding: 8px 0;
+                font-size: 0.95rem;
+            }
+            main {
+                padding: 10px;
+            }
+            .content-center {
+                padding: 15px 10px;
+            }
+            .card {
+                max-width: 100%;
+                padding: 12px;
+                margin: 10px 0;
+            }
+            .card img {
+                width: 70px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .profile-image {
+                width: 80px;
+            }
         }
     </style>
 </head>
