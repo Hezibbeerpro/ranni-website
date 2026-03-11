@@ -1,4 +1,16 @@
-remote_theme: jekyll/minima # או התמה שבה אתה משתמש
+remote_theme: jekyll/minima
+url: "https://yourdomain.com"
+baseurl: ""
+
+title: "רני באר - אתר אישי של רני"
+description: "אתר אישי של רני באר. משחקים, סרטים, ופיפא. מעניין, כיף ומלא תוכן חדש."
+author: "רני באר"
+lang: "he"
+
+# SEO
+google_site_verification: ""
+
 plugins:
   - jekyll-sitemap
+  - jekyll-feed
 
