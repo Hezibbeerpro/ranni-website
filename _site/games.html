@@ -3,62 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>משחקים</title>
+    <meta name="description" content="משחקי רני - הנגיחות של רני ומשחקים נוספים. משחקים מהנים וממכרים עבור כל הגילאים.">
+    <meta name="keywords" content="משחקים, הנגיחות, רני באר, משחקי אינטרנט, משחקים ברשת">
+    <meta name="author" content="רני באר">
     
-    <link rel="icon" type="image/png" href="/assets/images/maccabi_logo.png">
+    <meta property="og:title" content="משחקים - רני באר">
+    <meta property="og:description" content="משחקי רני - הנגיחות של רני ומשחקים נוספים. משחקים מהנים וממכרים עבור כל הגילאים.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://localhost:4000/ranni-website/games.html">
+    <meta property="og:image" content="http://localhost:4000/ranni-website/assets/images/ball.jpg">
+    <meta property="og:site_name" content="רני באר - אתר אישי של רני">
+    <meta property="og:locale" content="he_IL">
+    
+    
+    <link rel="canonical" href="http://localhost:4000/ranni-website/games.html">
+    
+    
+    <title>משחקים - רני באר</title>
+    <link rel="icon" type="image/jpeg" href="/ranni-website/assets/images/ball.jpg">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "רני באר",
+        "url": "http://localhost:4000/ranni-website/",
+        "sameAs": []
+    }
+    </script>
     
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        header, footer {
-            background-color: #0033A0; /* כחול מכבי תל אביב */
-            color: #FFD700; /* צהוב מכבי תל אביב */
-            padding: 15px;
-            text-align: center;
-        }
-        header a {
-            color: #FFD700;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        main {
-            flex: 1;
-            padding: 20px;
-        }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        header, footer { background-color: #0033A0; color: #FFD700; padding: 15px; text-align: center; }
+        header a { color: #FFD700; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 1.2rem; }
+        main { flex: 1; padding: 20px; }
+        .content-center { text-align: center; padding: 40px; }
+        .profile-image { width: 150px; }
     </style>
 </head>
 <body>
 
     <header>
         <nav>
-            <a href="/">רני באר</a>
-            <a href="/movies.html">סרטים</a>
-            <a href="/games.html">משחקים</a>
+            <a href="/ranni-website/">רני באר</a>
+            <a href="/ranni-website/movies.html">סרטים</a>
+            <a href="/ranni-website/games.html">משחקים</a>
         </nav>
     </header>
 
     <main>
-        <div style="text-align: center; padding: 40px;">
+        <div class="content-center">
     <h1>המשחקים של רני</h1>
     <p>מוכנים לאתגר? בחרו משחק והתחילו לשחק!</p>
     
-    <div style="margin-top: 50px;">
-        <div style="border: 3px solid #0033A0; border-radius: 15px; padding: 20px; display: inline-block; background-color: #fdfdfd; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-            <img src="/assets/images/ball.jpg" alt="כדור" style="width: 100px; border-radius: 50%; margin-bottom: 15px;">
-            <h2 style="color: #0033A0;">הנגיחות של רני</h2>
+    <div class="content-spaced">
+        <div class="card">
+            <img src="/ranni-website/assets/images/ball.jpg" alt="כדור">
+            <h2>הנגיחות של רני</h2>
             <p>אל תתנו לכדור ליפול לרצפה!</p>
-            <a href="/game.html" 
-               style="display: inline-block; background-color: #FFD700; color: #0033A0; padding: 12px 25px; text-decoration: none; font-weight: bold; border-radius: 5px; border: 2px solid #0033A0; transition: 0.3s;">
-               שחקו עכשיו
-            </a>
+            <a href="/ranni-website/game.html" class="card-link">שחקו עכשיו</a>
         </div>
     </div>
 </div>

@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://hezibbeer.github.io/Rani-Website/</loc>
-    <lastmod>2026-03-06</lastmod>
-  </url>
-  <url>
-    <loc>https://hezibbeer.github.io/Rani-Website/movies.html</loc>
-    <lastmod>2026-03-06</lastmod>
-  </url>
-  <url>
-    <loc>https://hezibbeer.github.io/Rani-Website/game.html</loc>
-    <lastmod>2026-03-06</lastmod>
-  </url>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>http://localhost:4000/ranni-website/game.html</loc>
+</url>
+<url>
+<loc>http://localhost:4000/ranni-website/games.html</loc>
+</url>
+<url>
+<loc>http://localhost:4000/ranni-website/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/ranni-website/movies.html</loc>
+</url>
+<url>
+<loc>http://localhost:4000/ranni-website/googleca6ed1f9f76a53de.html</loc>
+<lastmod>2026-03-04T07:57:57+02:00</lastmod>
+</url>
 </urlset>

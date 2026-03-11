@@ -3,50 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>אתגר הכדורים של רני</title>
+    <meta name="description" content="משחק הכדורים של רני - משחק פשוט ומהנה! לחץ על הכדורים הנכונים ותחמוק מהכדורים השגויים. בדוק את הניקוד שלך!">
+    <meta name="keywords" content="משחק כדורים, אתגר, רני באר, משחק אינטרנט, משחק חינם, משחק ילדים">
+    <meta name="author" content="רני באר">
     
-    <link rel="icon" type="image/png" href="/assets/images/maccabi_logo.png">
+    <meta property="og:title" content="אתגר הכדורים של רני - משחק אינטרנט">
+    <meta property="og:description" content="משחק הכדורים של רני - משחק פשוט ומהנה! לחץ על הכדורים הנכונים ותחמוק מהכדורים השגויים. בדוק את הניקוד שלך!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://localhost:4000/ranni-website/game.html">
+    <meta property="og:image" content="http://localhost:4000/ranni-website/assets/images/ball.jpg">
+    <meta property="og:site_name" content="רני באר - אתר אישי של רני">
+    <meta property="og:locale" content="he_IL">
+    
+    
+    <link rel="canonical" href="http://localhost:4000/ranni-website/game.html">
+    
+    
+    <title>אתגר הכדורים של רני - משחק אינטרנט</title>
+    <link rel="icon" type="image/jpeg" href="/ranni-website/assets/images/ball.jpg">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "רני באר",
+        "url": "http://localhost:4000/ranni-website/",
+        "sameAs": []
+    }
+    </script>
     
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        header, footer {
-            background-color: #0033A0; /* כחול מכבי תל אביב */
-            color: #FFD700; /* צהוב מכבי תל אביב */
-            padding: 15px;
-            text-align: center;
-        }
-        header a {
-            color: #FFD700;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        main {
-            flex: 1;
-            padding: 20px;
-        }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        header, footer { background-color: #0033A0; color: #FFD700; padding: 15px; text-align: center; }
+        header a { color: #FFD700; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 1.2rem; }
+        main { flex: 1; padding: 20px; }
+        .content-center { text-align: center; padding: 40px; }
+        .profile-image { width: 150px; }
     </style>
 </head>
 <body>
 
     <header>
         <nav>
-            <a href="/">רני באר</a>
-            <a href="/movies.html">סרטים</a>
-            <a href="/games.html">משחקים</a>
+            <a href="/ranni-website/">רני באר</a>
+            <a href="/ranni-website/movies.html">סרטים</a>
+            <a href="/ranni-website/games.html">משחקים</a>
         </nav>
     </header>
 
     <main>
-        <h1 style="text-align: center;">אתגר הכדורים של רני</h1>
+        <style>
+    @media (max-width: 480px) {
+        #game-area {
+            max-width: 100% !important;
+            height: 400px !important;
+            margin: 0 5px !important;
+        }
+        #ball {
+            width: 60px !important;
+            height: 60px !important;
+        }
+        #game-over-screen h2 {
+            font-size: 24px !important;
+        }
+        #game-over-screen p {
+            font-size: 18px !important;
+        }
+        #game-over-screen button {
+            padding: 10px 20px !important;
+            font-size: 16px !important;
+        }
+    }
+</style>
+
+<h1 style="text-align: center;">אתגר הכדורים של רני</h1>
 <p style="text-align: center; font-weight: bold;">
     ✅ לחץ על: <span style="color: blue;">מכבי תל אביב</span> או <span style="color: darkred;">ברצלונה</span> (+1)<br>
     ❌ אל תיגע ב: <span style="color: green;">מכבי חיפה</span> או <span style="color: white; background: #333;">ריאל מדריד</span> (-1)
@@ -76,10 +106,10 @@
 
     // רשימת הכדורים והערך שלהם
     const ballTypes = [
-        { src: "/assets/images/ball.jpg", points: 1 },         // מכבי ת"א
-        { src: "/assets/images/barcelona.jpg", points: 1 },    // ברצלונה
-        { src: "/assets/images/maccabi_haifa.jpg", points: -1 }, // מכבי חיפה
-        { src: "/assets/images/real_madrid.jpg", points: -1 }   // ריאל מדריד
+        { src: "/ranni-website/assets/images/ball.jpg", points: 1 },         // מכבי ת"א
+        { src: "/ranni-website/assets/images/barcelona.jpg", points: 1 },    // ברצלונה
+        { src: "/ranni-website/assets/images/maccabi_haifa.jpg", points: -1 }, // מכבי חיפה
+        { src: "/ranni-website/assets/images/real_madrid.jpg", points: -1 }   // ריאל מדריד
     ];
 
     let score = 0;

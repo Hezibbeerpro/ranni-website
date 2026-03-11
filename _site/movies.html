@@ -3,45 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>סרטים</title>
+    <meta name="description" content="הסרטים והסרטונים האהובים על רני. צפויו בסרטים על פיפא, משחקים וכל דבר מהנה.">
+    <meta name="keywords" content="סרטים, סרטונים, פיפא, יוטיוב, רני באר, תוכן וידאו">
+    <meta name="author" content="רני באר">
     
-    <link rel="icon" type="image/png" href="/assets/images/maccabi_logo.png">
+    <meta property="og:title" content="סרטים - רני באר">
+    <meta property="og:description" content="הסרטים והסרטונים האהובים על רני. צפויו בסרטים על פיפא, משחקים וכל דבר מהנה.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://localhost:4000/ranni-website/movies.html">
+    <meta property="og:image" content="http://localhost:4000/ranni-website/assets/images/ball.jpg">
+    <meta property="og:site_name" content="רני באר - אתר אישי של רני">
+    <meta property="og:locale" content="he_IL">
+    
+    
+    <link rel="canonical" href="http://localhost:4000/ranni-website/movies.html">
+    
+    
+    <title>סרטים - רני באר</title>
+    <link rel="icon" type="image/jpeg" href="/ranni-website/assets/images/ball.jpg">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "רני באר",
+        "url": "http://localhost:4000/ranni-website/",
+        "sameAs": []
+    }
+    </script>
     
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        header, footer {
-            background-color: #0033A0; /* כחול מכבי תל אביב */
-            color: #FFD700; /* צהוב מכבי תל אביב */
-            padding: 15px;
-            text-align: center;
-        }
-        header a {
-            color: #FFD700;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        main {
-            flex: 1;
-            padding: 20px;
-        }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        header, footer { background-color: #0033A0; color: #FFD700; padding: 15px; text-align: center; }
+        header a { color: #FFD700; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 1.2rem; }
+        main { flex: 1; padding: 20px; }
+        .content-center { text-align: center; padding: 40px; }
+        .profile-image { width: 150px; }
     </style>
 </head>
 <body>
 
     <header>
         <nav>
-            <a href="/">רני באר</a>
-            <a href="/movies.html">סרטים</a>
-            <a href="/games.html">משחקים</a>
+            <a href="/ranni-website/">רני באר</a>
+            <a href="/ranni-website/movies.html">סרטים</a>
+            <a href="/ranni-website/games.html">משחקים</a>
         </nav>
     </header>
 
@@ -49,15 +55,17 @@
         <h1>הסרטים של רני</h1>
 <p>כאן יופיעו הסרטים והסרטונים האהובים עליי.</p>
 
-<div style="margin-top: 30px; text-align: center;">
+<div class="video-section">
     <h2>מצאתי בפיפא את הלוחמים הכי טובים בצה"ל!!</h2>
-    <iframe width="560" height="315" 
-            src="https://www.youtube.com/embed/SByiUL3YS_0?list=PLnRrhv6vZWhs7CpscuoeSudhbpUk3C-7J" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowfullscreen>
-    </iframe>
+    <div class="video-wrapper">
+        <iframe 
+                src="https://www.youtube.com/embed/SByiUL3YS_0?list=PLnRrhv6vZWhs7CpscuoeSudhbpUk3C-7J" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+        </iframe>
+    </div>
 </div>
     </main>
 
