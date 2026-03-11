@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ page.description | default: site.description }}">
@@ -12,18 +11,9 @@
     <meta property="og:description" content="{{ page.description | default: site.description }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:image" content="{{ page.image | default: '/assets/images/maccabi_logo.png' | absolute_url }}">
-    <meta property="og:image:alt" content="{{ page.image-alt | default: 'רני באר - אתר אישי' }}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image" content="{{ '/assets/images/ball.jpg' | absolute_url }}">
     <meta property="og:site_name" content="{{ site.title }}">
     <meta property="og:locale" content="he_IL">
-    
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ page.title | default: site.title }}">
-    <meta name="twitter:description" content="{{ page.description | default: site.description }}">
-    <meta name="twitter:image" content="{{ page.image | default: '/assets/images/maccabi_logo.png' | absolute_url }}">
-    <meta name="twitter:image:alt" content="{{ page.image-alt | default: 'רני באר - אתר אישי' }}">
     
     {% if page.canonical %}
     <link rel="canonical" href="{{ page.canonical }}">
@@ -32,7 +22,7 @@
     {% endif %}
     
     <title>{{ page.title | default: site.title }}</title>
-    <link rel="icon" type="image/png" href="{{ '/assets/images/maccabi_logo.png' | relative_url }}">
+    <link rel="icon" type="image/jpeg" href="{{ '/assets/images/ball.jpg' | relative_url }}">
     
     <script type="application/ld+json">
     {
@@ -40,210 +30,17 @@
         "@type": "Person",
         "name": "רני באר",
         "url": "{{ '/' | absolute_url }}",
-        "sameAs": [],
-        "jobTitle": "תלמיד",
-        "homeLocation": {
-            "@type": "Place",
-            "address": {
-                "@type": "PostalAddress",
-                "addressCountry": "israel"
-            }
-        }
+        "sameAs": []
     }
     </script>
     
-    ```
-
-לאחר שתבצע Commit ו-Push של השינויים הללו, המתן מספר דקות והזן מחדש ב-Google Search Console את הכתובת המדויקת המופיעה גם ב-`robots.txt` שלך[cite: 9]:
-`https://hezibbeer.github.io/Rani-Website/sitemap.xml`
-
-האם תרצה שאסביר כיצד לוודא את תקינות ה-sitemap המיוצר אוטומטית לפני הגשתו המחודשת לגוגל?
-    
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        header, footer {
-            background-color: #0033A0; /* כחול מכבי תל אביב */
-            color: #FFD700; /* צהוב מכבי תל אביב */
-            padding: 15px;
-            text-align: center;
-        }
-        header a {
-            color: #FFD700;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        main {
-            flex: 1;
-            padding: 20px;
-        }
-        
-        /* Content section styling */
-        .content-center {
-            text-align: center;
-            padding: 40px;
-        }
-        .content-spaced {
-            margin-top: 50px;
-        }
-        .card {
-            border: 3px solid #0033A0;
-            border-radius: 15px;
-            padding: 20px;
-            display: inline-block;
-            background-color: #fdfdfd;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .card img {
-            width: 100px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-        }
-        .card h2 {
-            color: #0033A0;
-        }
-        .card-link {
-            display: inline-block;
-            background-color: #FFD700;
-            color: #0033A0;
-            padding: 12px 25px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            border: 2px solid #0033A0;
-            transition: 0.3s;
-        }
-        .card-link:hover {
-            background-color: #FFC700;
-            transform: scale(1.05);
-        }
-        .video-section {
-            margin-top: 30px;
-            text-align: center;
-        }
-        .video-section iframe {
-            max-width: 100%;
-            height: auto;
-        }
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 1000px;
-            height: 560px;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .profile-image {
-            width: 150px;
-        }
-        
-        /* Mobile Responsive Styles */
-        @media (max-width: 768px) {
-            body {
-                font-size: 14px;
-            }
-            header {
-                padding: 10px;
-            }
-            header a {
-                display: inline-block;
-                margin: 5px 8px;
-                font-size: 1rem;
-            }
-            main {
-                padding: 15px;
-            }
-            .content-center {
-                padding: 20px 15px;
-                text-align: center;
-            }
-            .card {
-                display: block;
-                width: 100%;
-                max-width: 400px;
-                margin: 15px auto;
-                padding: 15px;
-            }
-            .card img {
-                width: 80px;
-            }
-            .card h2 {
-                font-size: 1.3rem;
-                margin: 10px 0;
-            }
-            .card p {
-                font-size: 0.95rem;
-            }
-            .card-link {
-                display: block;
-                padding: 10px 15px;
-                margin-top: 10px;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            .profile-image {
-                width: 100px;
-                max-width: 100%;
-            }
-            h1 {
-                font-size: 1.8rem;
-                margin: 15px 0;
-            }
-            h2 {
-                font-size: 1.4rem;
-            }
-            .video-section {
-                margin: 20px 0;
-            }
-        }
-        
-        /* Game area responsive */
-        #game-area {
-            min-height: 500px;
-        }
-        
-        @media (max-width: 480px) {
-            header a {
-                display: block;
-                padding: 8px 0;
-                font-size: 0.95rem;
-            }
-            main {
-                padding: 10px;
-            }
-            .content-center {
-                padding: 15px 10px;
-            }
-            .card {
-                max-width: 100%;
-                padding: 12px;
-                margin: 10px 0;
-            }
-            .card img {
-                width: 70px;
-            }
-            h1 {
-                font-size: 1.5rem;
-            }
-            .profile-image {
-                width: 80px;
-            }
-        }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        header, footer { background-color: #0033A0; color: #FFD700; padding: 15px; text-align: center; }
+        header a { color: #FFD700; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 1.2rem; }
+        main { flex: 1; padding: 20px; }
+        .content-center { text-align: center; padding: 40px; }
+        .profile-image { width: 150px; }
     </style>
 </head>
 <body>

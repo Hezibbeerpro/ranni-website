@@ -1,5 +1,5 @@
 remote_theme: jekyll/minima
-url: "https://hezibbeer.github.io"
+url: "https://hezibbeerpro.github.io"
 baseurl: "/Rani-Website"
 
 title: "רני באר - אתר אישי של רני"
@@ -7,10 +7,7 @@ description: "ברוכים הבאים לאתר הרשמי של רני באר! כ
 author: "רני באר"
 lang: "he"
 
-# SEO
-google_site_verification: ""
-
 plugins:
+  - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-feed
-
