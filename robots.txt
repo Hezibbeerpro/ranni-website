@@ -3,8 +3,5 @@ Allow: /
 Disallow: /_site/
 Disallow: /admin/
 
-# Crawler delay
-Crawl-delay: 1
-
-# Sitemap
-Sitemap: https://hezibbeer.github.io/ranni-Website/sitemap.xml
+# Sitemap location (Updated to correct URL)
+Sitemap: https://hezibbeerpro.github.io/ranni-website/sitemap.xml
