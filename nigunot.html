@@ -1,0 +1,270 @@
+---
+layout: default
+title: הנגיחות של רני - משחק אינטרנט
+description: הנגיחות של רני - כדורים של מכבי תל אביב וברצלונה נופלים מהתקרה. הזיזו את הבסיס ימינה ושמאלה והצילו את כולם!
+keywords: הנגיחות של רני, משחק כדורים, מכבי תל אביב, ברצלונה, רני באר, משחק אינטרנט, משחק חינם, משחק ילדים
+---
+
+<style>
+    #nig-area {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        height: 500px;
+        background-color: #87CEEB;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 4px solid #0033A0;
+        border-radius: 10px;
+        touch-action: none;
+        user-select: none;
+        direction: ltr;
+    }
+    #nig-hud {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 22px;
+        font-weight: bold;
+        color: #0033A0;
+        z-index: 10;
+        pointer-events: none;
+        direction: rtl;
+    }
+    #nig-hud span.box { background: rgba(255,255,255,0.7); padding: 5px 10px; border-radius: 5px; }
+    .nig-ball {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        z-index: 5;
+        pointer-events: none;
+    }
+    #nig-paddle {
+        position: absolute;
+        bottom: 8px;
+        left: 0;
+        width: 100px;
+        height: 18px;
+        background: linear-gradient(#FFD700, #e0b800);
+        border: 3px solid #0033A0;
+        border-radius: 10px;
+        z-index: 6;
+    }
+    #nig-over {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 51, 160, 0.95);
+        z-index: 20;
+        text-align: center;
+        padding-top: 150px;
+        color: white;
+        direction: rtl;
+        box-sizing: border-box;
+    }
+    @media (max-width: 480px) {
+        #nig-area { max-width: 100%; height: 400px; margin: 0 5px; width: auto; }
+        #nig-over { padding-top: 110px; }
+        #nig-over h2 { font-size: 24px !important; }
+        #nig-over p { font-size: 18px !important; }
+        #nig-over button { padding: 10px 20px !important; font-size: 16px !important; }
+    }
+</style>
+
+<h1 style="text-align: center;">הנגיחות של רני</h1>
+<p style="text-align: center; font-weight: bold;">
+    הצילו את הכדורים של <span style="color: blue;">מכבי תל אביב</span> ו<span style="color: darkred;">ברצלונה</span> לפני שהם נופלים!<br>
+    הזיזו את הבסיס עם החיצים ← → או עם האצבע / העכבר.
+</p>
+
+<div id="nig-area">
+    <div id="nig-hud">
+        <span class="box">נקודות: <span id="nig-score">0</span></span>
+        <span class="box" id="nig-lives">❤️❤️❤️</span>
+    </div>
+
+    <div id="nig-paddle"></div>
+
+    <div id="nig-over">
+        <h2 style="font-size: 36px; color: #FFD700;">המשחק נגמר!</h2>
+        <p style="font-size: 24px;">התוצאה הסופית: <span id="nig-final">0</span></p>
+        <button onclick="nigStart()" style="margin-top: 20px; padding: 15px 30px; font-size: 20px; background-color: #FFD700; color: #0033A0; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">נסה שוב</button>
+    </div>
+</div>
+
+<script>
+    const nigArea = document.getElementById('nig-area');
+    const nigPaddle = document.getElementById('nig-paddle');
+    const nigScoreEl = document.getElementById('nig-score');
+    const nigLivesEl = document.getElementById('nig-lives');
+    const nigFinalEl = document.getElementById('nig-final');
+    const nigOver = document.getElementById('nig-over');
+
+    // מכבי תל אביב וברצלונה
+    const nigImages = [
+        "{{ '/assets/images/ball.jpg' | relative_url }}",
+        "{{ '/assets/images/barcelona.jpg' | relative_url }}"
+    ];
+
+    const BALL_SIZE_DESKTOP = 50;
+    const BALL_SIZE_MOBILE = 40;
+    const PADDLE_BOTTOM = 8;
+    const MAX_LIVES = 3;
+
+    let nigBalls = [];
+    let nigScore = 0;
+    let nigLives = MAX_LIVES;
+    let nigSpeed = 2.5;
+    let nigSpawnEvery = 1400;
+    let nigLastSpawn = 0;
+    let nigPaddleX = 0;
+    let nigKeyDir = 0;
+    let nigPlaying = false;
+    let nigFrame;
+    let nigLastTime = 0;
+
+    function nigBallSize() {
+        return window.innerWidth <= 480 ? BALL_SIZE_MOBILE : BALL_SIZE_DESKTOP;
+    }
+
+    function nigSetPaddle(x) {
+        const max = nigArea.clientWidth - nigPaddle.offsetWidth;
+        nigPaddleX = Math.max(0, Math.min(max, x));
+        nigPaddle.style.left = nigPaddleX + 'px';
+    }
+
+    function nigRenderLives() {
+        nigLivesEl.innerText = '❤️'.repeat(nigLives) + '🖤'.repeat(MAX_LIVES - nigLives);
+    }
+
+    function nigStart() {
+        nigBalls.forEach(b => b.el.remove());
+        nigBalls = [];
+        nigScore = 0;
+        nigLives = MAX_LIVES;
+        nigSpeed = 2.5;
+        nigSpawnEvery = 1400;
+        nigLastSpawn = 0;
+        nigLastTime = 0;
+        nigScoreEl.innerText = 0;
+        nigRenderLives();
+        nigOver.style.display = 'none';
+        nigSetPaddle((nigArea.clientWidth - nigPaddle.offsetWidth) / 2);
+        nigPlaying = true;
+        cancelAnimationFrame(nigFrame);
+        nigFrame = requestAnimationFrame(nigTick);
+    }
+
+    function nigSpawn() {
+        const size = nigBallSize();
+        const el = document.createElement('img');
+        el.className = 'nig-ball';
+        el.src = nigImages[Math.floor(Math.random() * nigImages.length)];
+        el.alt = 'כדור';
+        el.draggable = false;
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+        const x = Math.random() * (nigArea.clientWidth - size);
+        const ball = { el, x, y: -size, size };
+        el.style.transform = `translate(${x}px, ${ball.y}px)`;
+        nigArea.appendChild(el);
+        nigBalls.push(ball);
+    }
+
+    function nigTick(time) {
+        if (!nigPlaying) return;
+        // מנרמלים לפי זמן, כך שהמהירות זהה בכל קצב רענון (60 פריימים = 1)
+        const dt = nigLastTime ? Math.min((time - nigLastTime) / 16.667, 3) : 1;
+        nigLastTime = time;
+
+        if (nigKeyDir) nigSetPaddle(nigPaddleX + nigKeyDir * 7 * dt);
+
+        if (time - nigLastSpawn > nigSpawnEvery) {
+            nigSpawn();
+            nigLastSpawn = time;
+        }
+
+        const areaH = nigArea.clientHeight;
+        const paddleTop = areaH - PADDLE_BOTTOM - nigPaddle.offsetHeight;
+        const paddleW = nigPaddle.offsetWidth;
+
+        for (let i = nigBalls.length - 1; i >= 0; i--) {
+            const b = nigBalls[i];
+            b.y += nigSpeed * dt;
+            b.el.style.transform = `translate(${b.x}px, ${b.y}px)`;
+
+            const bottom = b.y + b.size;
+            if (bottom >= paddleTop) {
+                const center = b.x + b.size / 2;
+                const caught = center >= nigPaddleX && center <= nigPaddleX + paddleW;
+                if (caught && b.y < areaH - PADDLE_BOTTOM) {
+                    nigScore++;
+                    nigScoreEl.innerText = nigScore;
+                    // העלאת קושי עם הזמן
+                    nigSpeed = Math.min(nigSpeed + 0.08, 8);
+                    nigSpawnEvery = Math.max(nigSpawnEvery - 25, 600);
+                    nigRemove(i);
+                } else if (b.y >= areaH) {
+                    nigLives--;
+                    nigRenderLives();
+                    nigFlash('#f8d7da');
+                    nigRemove(i);
+                    if (nigLives <= 0) {
+                        nigEnd();
+                        return;
+                    }
+                }
+            }
+        }
+
+        nigFrame = requestAnimationFrame(nigTick);
+    }
+
+    function nigRemove(i) {
+        nigBalls[i].el.remove();
+        nigBalls.splice(i, 1);
+    }
+
+    function nigFlash(color) {
+        nigArea.style.backgroundColor = color;
+        setTimeout(() => { nigArea.style.backgroundColor = '#87CEEB'; }, 150);
+    }
+
+    function nigEnd() {
+        nigPlaying = false;
+        nigFinalEl.innerText = nigScore;
+        nigOver.style.display = 'block';
+    }
+
+    // שליטה: מקלדת
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { nigKeyDir = -1; e.preventDefault(); }
+        else if (e.key === 'ArrowRight') { nigKeyDir = 1; e.preventDefault(); }
+    });
+    window.addEventListener('keyup', (e) => {
+        if ((e.key === 'ArrowLeft' && nigKeyDir === -1) || (e.key === 'ArrowRight' && nigKeyDir === 1)) {
+            nigKeyDir = 0;
+        }
+    });
+
+    // שליטה: עכבר ומגע (pointer events מכסים את שניהם)
+    function nigPointerMove(e) {
+        if (!nigPlaying) return;
+        const rect = nigArea.getBoundingClientRect();
+        nigSetPaddle(e.clientX - rect.left - nigPaddle.offsetWidth / 2);
+    }
+    nigArea.addEventListener('pointermove', nigPointerMove);
+    nigArea.addEventListener('pointerdown', nigPointerMove);
+
+    window.addEventListener('load', nigStart);
+</script>
